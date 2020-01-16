@@ -54,6 +54,7 @@ public class FileServiceApplicationTests {
             File tmpFile = new File(tmpDir + fileName);
             ImageIO.write(bi, "png", tmpFile);
             log.info("File has been downloaded --> " + tmpFile.getAbsolutePath());
+            Assert.assertNotNull(tmpFile);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());
