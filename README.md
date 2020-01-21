@@ -5,7 +5,7 @@
 
 ### Tutorial
 ```
-https://medium.com/@gustavo.ponce.ch/how-to-download-an-image-png-file-using-grpc-java-4c4ad9eeed22?source=friends_link&sk=ca8b349f7bc6c47ec702c63fe9ab5d93
+https://link.medium.com/A2JUQOp5q3
 ```
 
 ### Run The Application
