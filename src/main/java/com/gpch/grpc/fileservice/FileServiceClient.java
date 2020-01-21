@@ -38,13 +38,12 @@ public class FileServiceClient {
         nonBlockingStub = FileServiceGrpc.newStub(channel);
     }
 
-    public ByteArrayOutputStream downloadFie(String fileName) {
+    public ByteArrayOutputStream downloadFile(String fileName) {
 
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final CountDownLatch finishLatch = new CountDownLatch(1);
         final AtomicBoolean completed = new AtomicBoolean(false);
 
-        // observer to process each chunk of data the comes over the wire
         StreamObserver<DataChunk> streamObserver = new StreamObserver<DataChunk>() {
             @Override
             public void onNext(DataChunk dataChunk) {
@@ -58,13 +57,13 @@ public class FileServiceClient {
 
             @Override
             public void onError(Throwable t) {
-                log.info("acquireImage.onError()", t);
+                log.error("downloadFile() error", t);
                 finishLatch.countDown();
             }
 
             @Override
             public void onCompleted() {
-                log.info("acquireImage.onCompleted() successful!");
+                log.info("downloadFile() has been completed!");
                 completed.compareAndSet(false, true);
                 finishLatch.countDown();
             }
@@ -81,11 +80,11 @@ public class FileServiceClient {
             finishLatch.await(5, TimeUnit.MINUTES);
 
             if (!completed.get()) {
-                throw new Exception("The acquireImage method did not complete");
+                throw new Exception("The downloadFile() method did not complete");
             }
 
         } catch (Exception e) {
-            log.error("The acquireImage method did not complete");
+            log.error("The downloadFile() method did not complete");
         }
 
         return baos;

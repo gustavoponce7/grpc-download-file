@@ -21,6 +21,7 @@ public class FileServiceImpl extends FileServiceGrpc.FileServiceImplBase {
     public void downloadFile(DownloadFileRequest request, StreamObserver<DataChunk> responseObserver) {
         try {
             String fileName = "/files/" + request.getFileName();
+
             // read the file and convert to a byte array
             InputStream inputStream = getClass().getResourceAsStream(fileName);
             byte[] bytes = inputStream.readAllBytes();
@@ -39,7 +40,7 @@ public class FileServiceImpl extends FileServiceGrpc.FileServiceImplBase {
             responseObserver.onCompleted();
         } catch (Throwable e) {
             responseObserver.onError(Status.ABORTED
-                    .withDescription("Unable to acquire the file " + request.getFileName())
+                    .withDescription("Unable to acquire the image " + request.getFileName())
                     .withCause(e)
                     .asException());
         }
