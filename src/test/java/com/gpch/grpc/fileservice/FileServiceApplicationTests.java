@@ -41,7 +41,7 @@ public class FileServiceApplicationTests {
             String tmpDir = System.getProperty(property);
 
             String fileName = "icon.png";
-            ByteArrayOutputStream imageOutputStream = fileServiceClient.downloadFie(fileName);
+            ByteArrayOutputStream imageOutputStream = fileServiceClient.downloadFile(fileName);
             byte[] bytes = imageOutputStream.toByteArray();
 
             ImageIcon imageIcon = new ImageIcon(bytes);
